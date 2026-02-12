@@ -5,6 +5,8 @@ import { TopTabs } from "./TopTabs";
 import { SubcategorySidebar } from "./SubcategorySidebar";
 import { useState } from "react";
 import { categoryTree, mockEntries } from "../../api/mockData";
+import { EntryViewer } from "./EntryViewer";
+
 
 // Main layout container (single source of truth for UI state)
 export function AppShell() {
@@ -96,85 +98,16 @@ export function AppShell() {
           <h2 style={{ marginTop: 0 }}>{activeSubcategory}</h2>
 
           <div style={{ display: "flex", gap: "24px", marginTop: "16px" }}>
-            {/* Image panel for active entry */}
-            <div
-              style={{
-                width: "320px",
-                height: "320px",
-                border: "1px solid #444",
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "center",
-                overflow: "hidden", // prevents image overflow
-              }}
-            >
-              {activeEntry ? (
-                <img
-                  src={activeEntry.imageUrl}
-                  alt={activeEntry.name}
-                  style={{
-                    width: "100%",
-                    height: "100%",
-                    objectFit: "cover",
-                  }}
-                />
-              ) : (
-                "No entries"
-              )}
-            </div>
-
-            {/* Description panel for active entry */}
-            <div
-              style={{
-                flex: 1,
-                minHeight: "320px",
-                border: "1px solid #444",
-                padding: "16px",
-              }}
-            >
-              <h3 style={{ marginTop: 0 }}>{activeEntry ? activeEntry.name : "No entries"}</h3>
-
-              {activeEntry ? (
-                <>
-                  {/* Entry description */}
-                  <p style={{ whiteSpace: "pre-wrap" }}>{activeEntry.description}</p>
-
-
-                  {/* Position indicator within filtered list */}
-                  <p style={{ opacity: 0.8 }}>
-                    {safeIndex + 1} / {sortedEntries.length}
-                  </p>
-                </>
-              ) : (
-                <p>No entries in this subcategory yet.</p>
-              )}
-            </div>
-          </div>
-
-          {/* Navigation controls for entry browsing */}
-          <div
-            style={{
-              display: "flex",
-              justifyContent: "space-between",
-              marginTop: "24px",
-            }}
-          >
-            <button
-              onClick={handlePrev}
-              disabled={!hasEntries || safeIndex === 0}
-            >
-              {"< Back"}
-            </button>
-
-            <button
-              onClick={handleNext}
-              disabled={
-                !hasEntries ||
-                safeIndex === sortedEntries.length - 1
-              }
-            >
-              {"Next >"}
-            </button>
+            <EntryViewer
+            activeEntry={activeEntry}
+            positionText={
+                activeEntry ? `${safeIndex + 1} / ${sortedEntries.length}` : ""
+            }
+            onPrev={handlePrev}
+            onNext={handleNext}
+            disablePrev={!hasEntries || safeIndex === 0}
+            disableNext={!hasEntries || safeIndex === sortedEntries.length - 1}
+            />
           </div>
         </main>
       </div>
