@@ -4,15 +4,12 @@
 import { TopTabs } from "./TopTabs";
 import { SubcategorySidebar } from "./SubcategorySidebar";
 import { useState } from "react";
+import { categoryTree } from "../../api/mockData";
+
 
 // Static example category tree (replace with real data later)
 export function AppShell() {
   // top-level categories mapped to their subcategories
-  const categoryTree = {
-    Characters: ["Eternals", "Gods", "Pirates", "Variants"],
-    Monsters: ["Dragons", "Creatures"],
-    Buildings: ["Structures", "Landmarks"],
-  } as const;
 
   // derive top-level category names as a literal union array
   const topCategories = Object.keys(categoryTree) as Array<keyof typeof categoryTree>;
