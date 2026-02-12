@@ -7,6 +7,10 @@ export const categoryTree = {
     Buildings: ["Structures", "Landmarks"],
 } as const;
 
+export type TopCategory = keyof typeof categoryTree;
+export type Subcategory = (typeof categoryTree)[TopCategory][number];
+
+
 export const mockEntries: Entry[] = [
   {
     id: "e1",

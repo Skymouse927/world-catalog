@@ -1,6 +1,6 @@
 // AppShell.tsx
 // Top-level layout: manages category state and composes TopTabs, SubcategorySidebar, and main content.
-
+import type { Subcategory } from "../../api/mockData";
 import { TopTabs } from "./TopTabs";
 import { SubcategorySidebar } from "./SubcategorySidebar";
 import { useState } from "react";
@@ -21,8 +21,8 @@ export function AppShell() {
   const subCategories = categoryTree[activeTopCategory];
 
   // Currently selected subcategory
-  const [activeSubcategory, setActiveSubcategory] =
-    useState<string>(subCategories[0]);
+  const [activeSubcategory, setActiveSubcategory] = useState<Subcategory>(subCategories[0]);
+
 
   // Index of the currently selected entry within the filtered list
   const [activeEntryIndex, setActiveEntryIndex] = useState(0);
@@ -37,7 +37,7 @@ export function AppShell() {
 
   // Handle selecting a subcategory
   // Resets entry index to the first result
-  const handleSelectSubcategory = (name: string) => {
+  const handleSelectSubcategory = (name: Subcategory) => {
     setActiveSubcategory(name);
     setActiveEntryIndex(0);
   };

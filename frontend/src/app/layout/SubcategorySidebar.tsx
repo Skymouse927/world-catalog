@@ -1,7 +1,9 @@
+import type { Subcategory } from "../../api/mockData";
+
 type SidebarProps = {
-  subcategories: readonly string[];
-  active: string;
-  onSelectSubcategory: (name: string) => void;
+  subcategories: readonly Subcategory[];
+  active: Subcategory;
+  onSelectSubcategory: (name: Subcategory) => void;
 };
 
 
