@@ -1,13 +1,15 @@
 type SidebarProps = {
-  subcategories: string[];
+  subcategories: readonly string[];
   active: string;
+  onSelectSubcategory: (name: string) => void;
 };
 
-export function SubcategorySidebar({ subcategories, active }: SidebarProps) {
+
+export function SubcategorySidebar({ subcategories, active, onSelectSubcategory }: SidebarProps) {
   return (
     <aside
       style={{
-        width: "260px",
+        width: "160px",
         borderRight: "1px solid #444",
         padding: "16px",
       }}
@@ -18,6 +20,7 @@ export function SubcategorySidebar({ subcategories, active }: SidebarProps) {
         {subcategories.map((name) => (
           <button
             key={name}
+            onClick={() => onSelectSubcategory(name)}
             style={{
               textAlign: "left",
               padding: "8px 10px",

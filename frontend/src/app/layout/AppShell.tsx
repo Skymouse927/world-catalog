@@ -1,25 +1,50 @@
+// AppShell.tsx
+// Top-level layout: manages category state and composes TopTabs, SubcategorySidebar, and main content.
+
 import { TopTabs } from "./TopTabs";
 import { SubcategorySidebar } from "./SubcategorySidebar";
+import { useState } from "react";
 
-// AppShell matches your mockup layout.
-// For now we use static arrays (fake data).
-// Later, these will come from Supabase.
-
+// Static example category tree (replace with real data later)
 export function AppShell() {
-  const topCategories = ["Characters", "Monsters", "Buildings"];
-  const subcategories = ["Eternals", "Gods", "Pirates"];
+  // top-level categories mapped to their subcategories
+  const categoryTree = {
+    Characters: ["Eternals", "Gods", "Pirates", "Variants"],
+    Monsters: ["Dragons", "Creatures"],
+    Buildings: ["Structures", "Landmarks"],
+  } as const;
+
+  // derive top-level category names as a literal union array
+  const topCategories = Object.keys(categoryTree) as Array<keyof typeof categoryTree>;
+  // active top category (narrow union type)
+  const [activeTopCategory, setActiveTopCategory] = useState<keyof typeof categoryTree>(topCategories[0]);
+  // subcategories for the active top category
+  const subCategories = categoryTree[activeTopCategory];
+  // active subcategory (string)
+  const [activeSubcategory, setActiveSubcategory] = useState<string>(subCategories[0]);
+
+  // Select a top-level category: update top category and reset subcategory to the first one
+  const handleSelectTopCategory = (name: keyof typeof categoryTree) => {
+    setActiveTopCategory(name);
+    setActiveSubcategory(categoryTree[name][0]);
+  };
 
   return (
     <div style={{ minHeight: "100vh" }}>
-      <TopTabs categories={topCategories} active="Characters" />
+      {/* Top horizontal tabs for top-level categories */}
+      <TopTabs categories={topCategories} active={activeTopCategory} onSelectCategory={handleSelectTopCategory} />
 
       <div style={{ display: "flex" }}>
-        <SubcategorySidebar subcategories={subcategories} active="Eternals" />
+        {/* Left sidebar listing subcategories for the active top category */}
+        <SubcategorySidebar subcategories={subCategories} active={activeSubcategory} onSelectSubcategory={setActiveSubcategory} />
 
+        {/* Main content area */}
         <main style={{ flex: 1, padding: "24px" }}>
-          <h2 style={{ marginTop: 0 }}>Eternals</h2>
+          {/* Display currently selected subcategory */}
+          <h2 style={{ marginTop: 0 }}>{activeSubcategory}</h2>
 
           <div style={{ display: "flex", gap: "24px", marginTop: "16px" }}>
+            {/* Placeholder for image */}
             <div
               style={{
                 width: "320px",
@@ -33,6 +58,7 @@ export function AppShell() {
               Image
             </div>
 
+            {/* Description panel for the selected entry */}
             <div
               style={{
                 flex: 1,
@@ -48,6 +74,7 @@ export function AppShell() {
             </div>
           </div>
 
+          {/* Navigation controls (placeholder) */}
           <div style={{ display: "flex", justifyContent: "space-between", marginTop: "24px" }}>
             <button>{"< Back"}</button>
             <button>{"Next >"}</button>
