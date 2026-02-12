@@ -120,3 +120,72 @@ You updated `TopTabs` to use a generic props type:
 - Then migrate data + auth + storage to Supabase
 
 ---
+
+# 🌍 World Catalog — Progress Snapshot
+
+---
+
+# 📍 Phase 1 — Layout Foundation ✅
+
+### Completed
+
+- Removed default Vite demo scaffold
+- Fixed CSS centering behavior
+- Built full-page application shell
+- Implemented:
+  - `AppShell`
+  - `TopTabs`
+  - `SubcategorySidebar`
+- Introduced structured `categoryTree`
+- Established Smart Parent / Dumb Child architecture
+
+### Result
+
+- Full-page layout matching design mock
+- Interactive top-level category switching
+- Subcategory reset logic implemented
+- Clean separation of state and presentation
+
+---
+
+# 📍 Phase 2 — Interactive Category State ✅
+
+### Completed
+
+- Added `activeTopCategory`
+- Added `activeSubcategory`
+- Reset subcategory when top category changes
+- Removed hardcoded UI state
+- Converted `TopTabs` to generic TypeScript component
+- Ensured no stale selection bugs
+
+### Architectural Improvements
+
+- State lifted to `AppShell`
+- Derived subcategories from `categoryTree`
+- Single source of truth established
+
+---
+
+# 📍 Phase 3 — Entry System (Mock Data) ✅
+
+## Objective
+
+Introduce scalable entry data, filtering, navigation, and stronger architectural separation.
+
+---
+
+## ✅ Data Layer Enhancements
+
+### Entry Model Added
+
+Created `src/types/models.ts`:
+
+```ts
+export type Entry = {
+  id: string;
+  name: string;
+  description: string;
+  imageUrl: string;
+  subcategories: Subcategory[];
+};
