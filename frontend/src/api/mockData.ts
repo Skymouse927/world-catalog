@@ -10,23 +10,23 @@ export const categoryTree = {
 export const mockEntries: Entry[] = [
   {
     id: "e1",
-    name: "Astra Vale",
-    description: "An Eternal who records history through living ink.",
+    name: "Cedric Diggery",
+    description: "- Bounty hunter\n- Standard harry potter powers\n",
     imageUrl: "https://picsum.photos/seed/astra/600/400",
     subcategories: ["Eternals", "Variants"], // multi-subcategory example
   },
   {
     id: "e2",
-    name: "Korrin Tideblade",
-    description: "A pirate captain with a compass that points to regret.",
+    name: "Beach Grandma",
+    description: "- Strong independent woman.",
     imageUrl: "https://picsum.photos/seed/korrin/600/400",
     subcategories: ["Pirates"],
   },
   {
     id: "e3",
-    name: "Embermaw",
-    description: "A dragon whose breath crystallizes into glass.",
+    name: "Beach Grandpa",
+    description: "- A variant of the grandparent's series who enjoys long walks on the beach,\n- snuggling in with a good book,\n- and strong independent women.\n- Was apart of the book club before disbandment\n- We may never… EVER… use him again *sinister laughter*",
     imageUrl: "https://picsum.photos/seed/embermaw/600/400",
-    subcategories: ["Dragons", "Creatures"], // multi-subcategory example
+    subcategories: ["Pirates", "Eternals"], // multi-subcategory example
   },
 ];
